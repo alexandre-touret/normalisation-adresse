@@ -3,7 +3,7 @@ input {
     codec =>plain{
     charset => "UTF-8"
     }
-    path => ["/home/littlewing/src/adresseZ/data/*.csv"]
+    path => ["/home/littlewing/src/adresseZ/normalisation-adresse/data/*.csv"]
     sincedb_path => "logstash/.sincedb_path"
     start_position => "beginning"
   }
