@@ -1,0 +1,136 @@
+PUT /ban
+{
+"settings" : {
+        "number_of_shards" : 1,
+        "analysis": {
+      "analyzer": {
+        "autocomplete": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "standard",
+            "lowercase",
+            "stop",
+            "kstem",
+            "ngram_filter"
+          ]
+        },
+        "ngram_analyzer": {
+          "type": "custom",
+          "tokenizer": "whitespace",
+          "filter": [
+            "lowercase",
+            "asciifolding",
+            "ngram_filter"
+          ]
+        },
+        "whitespace_analyzer": {
+          "type": "custom",
+          "tokenizer": "whitespace",
+          "filter": [
+            "lowercase",
+            "asciifolding"
+          ]
+        }
+      },
+      "filter": {
+        "ngram_filter": {
+          "type": "nGram",
+          "min_gram": 3,
+          "max_gram": 15,
+          "token_chars": [
+            "letter",
+            "digit",
+            "punctuation",
+            "symbol"
+          ]
+        }
+      }
+    }
+        
+        
+       },
+    "mappings": {
+      "address": {
+        "_all": {
+        "analyzer": "ngram_analyzer",
+        "search_analyzer": "whitespace_analyzer"
+      },
+        "properties": {
+          "@timestamp": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "@version": {
+            "type": "string"
+          },
+          "alias": {
+            "type": "string",
+            "include_in_all": false
+          },
+          "code_insee": {
+            "type": "string",
+            "include_in_all": false
+          },
+          "code_post": {
+            "type": "string"
+          },
+          "host": {
+            "type": "string",
+            "include_in_all": false
+          },
+          "id": {
+            "type": "string"
+          },
+          "id_fantoir": {
+            "type": "string",
+            "include_in_all": false
+          },
+          "libelle_acheminement": {
+            "type": "string",
+            "include_in_all": false
+          },
+          "location": {
+               "type": "geo_point"
+       
+          },
+          "lonlat": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "nom_afnor": {
+            "type": "string"
+          },
+          "nom_commune": {
+            "type": "string"
+          },
+          "nom_ld": {
+            "type": "string"
+          },
+          "nom_voie": {
+            "type": "string"
+          },
+          "numero": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "rep": {
+            "type": "string"
+          },
+          "x": {
+            "type": "string",
+            "include_in_all": false
+          },
+          "y": {
+            "type": "string",
+            "include_in_all": false
+          }
+        }
+      }
+    }
+  }
+

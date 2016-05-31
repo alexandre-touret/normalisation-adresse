@@ -1,0 +1,3 @@
+#!/bin/sh
+
+curl -XPUT 'http://127.0.0.1:9200/ban/_mapping' -d ' `cat mapping.json` '

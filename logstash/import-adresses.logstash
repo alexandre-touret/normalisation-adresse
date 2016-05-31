@@ -1,0 +1,46 @@
+input {
+  file {
+    codec =>plain{
+    charset => "UTF-8"
+    }
+    path => ["/home/littlewing/src/adresseZ/data/*.csv"]
+    sincedb_path => "logstash/.sincedb_path"
+    start_position => "beginning"
+  }
+}
+
+filter {
+	if [message] =~ /^"id";"nom_voie"/ {
+	drop { }
+	}
+ 	csv {
+    columns => ["id","nom_voie","id_fantoir","numero","rep","code_insee","code_post","alias","nom_ld","nom_afnor","libelle_acheminement","x","y","lon","lat","nom_commune"]
+    separator => ";"
+	source => message
+  }
+
+  mutate {
+    rename => [ "lat", "[location][lat]", "lon", "[location][lon]" ]
+  }
+   mutate {
+    convert => [ "[location][lat]", "float" ]
+    convert => [ "[location][lon]", "float" ]
+    convert => [ "[lon]", "float" ]
+    convert => [ "[lat]", "float" ]
+    convert => ["[location]","float"]
+    }
+}
+
+
+output {
+        stdout{
+        codec => "json"
+        }
+    elasticsearch {
+    hosts => ["localhost"]
+    index => "ban"
+    document_type => "address"
+    workers => 8
+    document_id => "%{id}"
+  }
+}

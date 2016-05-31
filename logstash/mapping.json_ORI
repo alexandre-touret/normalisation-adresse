@@ -1,0 +1,211 @@
+{
+  "settings": {
+    "analysis": {
+      "analyzer": {
+        "autocomplete": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "standard",
+            "lowercase",
+            "stop",
+            "kstem",
+            "ngram_filter"
+          ]
+        },
+        "ngram_analyzer": {
+          "type": "custom",
+          "tokenizer": "whitespace",
+          "filter": [
+            "lowercase",
+            "asciifolding",
+            "ngram_filter"
+          ]
+        },
+        "whitespace_analyzer": {
+          "type": "custom",
+          "tokenizer": "whitespace",
+          "filter": [
+            "lowercase",
+            "asciifolding"
+          ]
+        }
+      },
+      "filter": {
+        "ngram_filter": {
+          "type": "nGram",
+          "min_gram": 3,
+          "max_gram": 15,
+          "token_chars": [
+            "letter",
+            "digit",
+            "punctuation",
+            "symbol"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "region": {
+      "properties": {
+        "insee": {
+          "type": "string",
+          "store": true
+        },
+        "zipcode": {
+          "type": "string",
+          "store": true
+        },
+        "city": {
+          "type": "string",
+          "store": true
+        },
+        "dept": {
+          "type": "string",
+          "store": true
+        },
+        "region": {
+          "type": "string",
+          "store": true
+        }
+      }
+    },
+    "contract": {
+      "properties": {
+        "idpp": {
+          "type": "string",
+          "store": true
+        },
+        "extid": {
+          "type": "string",
+          "store": true
+        },
+        "source": {
+          "type": "string",
+          "store": true
+        }
+      }
+    },
+    "address": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "nomVoie": {
+          "type": "string"
+        },
+        "idFantoir": {
+          "type": "string"
+        },
+        "numero": {
+          "type": "string"
+        },
+        "rep": {
+          "type": "string"
+        },
+        "codeInsee": {
+          "type": "string"
+        },
+        "codePost": {
+          "type": "string"
+        },
+        "alias": {
+          "type": "string"
+        },
+        "nomLd": {
+          "type": "string"
+        },
+        "nomAfnor": {
+          "type": "string"
+        },
+        "libelleAcheminement": {
+          "type": "string"
+        },
+        "location": {
+          "type": "geo_point"
+        },
+        "nomCommune": {
+          "type": "string"
+        }
+      }
+    },
+    "pp": {
+      "_all": {
+        "index_analyzer": "ngram_analyzer",
+        "search_analyzer": "whitespace_analyzer"
+      },
+      "properties": {
+        "title": {
+          "type": "string",
+          "store": true,
+          "include_in_all": false
+        },
+        "firstname": {
+          "type": "string",
+          "store": true
+        },
+        "lastname": {
+          "type": "string",
+          "store": true
+        },
+        "fullname": {
+          "type": "string",
+          "store": true,
+          "index": "not_analyzed"
+        },
+        "address": {
+          "type": "string",
+          "store": true
+        },
+        "address_ext": {
+          "type": "string",
+          "store": true
+        },
+        "email": {
+          "type": "string",
+          "store": true,
+          "index": "not_analyzed"
+        },
+        "phone": {
+          "type": "string",
+          "store": true,
+          "index": "not_analyzed"
+        },
+        "zipcode": {
+          "type": "string",
+          "store": true
+        },
+        "city": {
+          "type": "string",
+          "store": true
+        },
+        "extsysid": {
+          "type": "string",
+          "store": true,
+          "index": "not_analyzed"
+        },
+        "status": {
+          "type": "string",
+          "store": true,
+          "index": "not_analyzed"
+        },
+        "elu": {
+          "type": "boolean",
+          "store": true,
+          "index": "not_analyzed"
+        },
+        "collaborateur": {
+          "type": "boolean",
+          "store": true,
+          "index": "not_analyzed"
+        },
+        "birthdate": {
+          "type": "date",
+          "store": true,
+          "index": "not_analyzed"
+        }
+      }
+    }
+  }
+}
