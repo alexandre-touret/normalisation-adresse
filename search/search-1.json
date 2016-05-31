@@ -1,0 +1,33 @@
+#/GET /ban/address/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "multi_match": {
+            "query": "vallon",
+            "type": "best_fields",
+            "fields": [
+              "nom_ld",
+              "nom_afnor"
+            ]
+          }
+        },
+        {
+          "match": {
+            "nom_commune": {
+              "query": "grave"
+            }
+          }
+        }
+      ],
+      "filter": [
+        {
+          "term": {
+            "code_post": "05320"
+          }
+        }
+      ]
+    }
+  }
+}
